@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智驾月报 — 2026年10月</title>
+<style>
+:root{
+  --bg:#F4F8FF;
+  --bg-grad:radial-gradient(1100px 560px at 8% -10%, rgba(45,127,249,.32), transparent 60%),
+            radial-gradient(900px 520px at 110% 2%, rgba(240,180,65,.24), transparent 55%),
+            radial-gradient(800px 480px at 50% 115%, rgba(168,85,247,.20), transparent 60%);
+  --card:#FFFFFF;
+  --raise:#EEF4FF;
+  --border:#DBE5F4;
+  --border-strong:#B8C8E0;
+  --text:#0F172A;
+  --text-mid:#1E293B;
+  --text-dim:#475569;
+  --main:#2D7FF9;
+  --main-2:#5B9BFF;
+  --main-3:#1A5FD6;
+  --main-glow:rgba(45,127,249,.26);
+  --main-line:rgba(45,127,249,.52);
+  --main-soft:rgba(45,127,249,.09);
+  --main-chip:rgba(45,127,249,.14);
+  --gold:#E89B0E;
+  --gold-bright:#FACC15;
+  --gold-2:#F0B429;
+  --gold-line:rgba(232,155,14,.50);
+  --gold-soft:rgba(250,204,21,.14);
+  --violet:#A855F7;
+  --violet-soft:rgba(168,85,247,.10);
+  --violet-line:rgba(168,85,247,.44);
+  --green:#10B981;
+  --green-soft:rgba(16,185,129,.10);
+  --green-line:rgba(16,185,129,.44);
+  --orange:#F97316;
+  --orange-soft:rgba(249,115,22,.10);
+  --orange-line:rgba(249,115,22,.44);
+  --rose:#E11D48;
+  --rose-soft:rgba(225,29,72,.10);
+  --rose-line:rgba(225,29,72,.44);
+  /* chip 鲜亮渐变配色(参考 OTA/深蓝新闻页:亮浅渐变 + 深字/白字对比,亮晶晶风格) */
+  --gold-grad-chip:linear-gradient(120deg,#F5C860,#E8960C);
+  --gold-glow:rgba(232,150,12,.40);
+  --blue-grad-chip:linear-gradient(120deg,#2D7FF9,#5B9BFF);
+  --blue-glow:rgba(45,127,249,.36);
+  --green-grad-chip:linear-gradient(120deg,#10B981,#059669);
+  --green-glow:rgba(16,185,129,.36);
+  --violet-grad-chip:linear-gradient(120deg,#A855F7,#7C3AED);
+  --violet-glow:rgba(168,85,247,.36);
+  --orange-grad-chip:linear-gradient(120deg,#FB923C,#EA580C);
+  --orange-glow:rgba(234,88,12,.36);
+  --rose-grad-chip:linear-gradient(120deg,#FB7185,#E11D48);
+  --rose-glow:rgba(225,29,72,.36);
+  /* chip 上的文字色(深色文字配亮金,白色文字配亮蓝/亮紫) */
+  --on-gold:#1a1400;
+  --on-light:#FFFFFF;
+  --grad:linear-gradient(135deg,#5B9BFF 0%,#2D7FF9 55%,#1A5FD6 100%);
+  --h1grad:linear-gradient(120deg,#0F172A 4%,#5B9BFF 32%,#2D7FF9 72%,#F5C860 100%);
+  --gold-grad:linear-gradient(135deg,#FCD34D 0%,#F0B429 55%,#E89B0E 100%);
+  --shadow:0 10px 26px rgba(45,127,249,.22);
+  --shadow-card:0 4px 14px rgba(45,127,249,.10);
+  --shadow-raise:0 2px 8px rgba(45,127,249,.07);
+  --hair:inset 0 0 0 0 transparent;
+  --glow-main:0 0 18px rgba(45,127,249,.38);
+  --glow-gold:0 0 14px rgba(232,155,14,.36);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg); color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+  font-size:17px; line-height:1.7; -webkit-font-smoothing:antialiased; overflow-x:hidden;}
+.container{background:var(--bg-grad);}
+.wrap{max-width:860px; margin:0 auto; padding:0 22px 60px;}
+
+/* Hero */
+.hero{padding:50px 0 8px;}
+.kicker-row{display:flex; align-items:center; gap:14px; margin-bottom:22px;}
+.kicker{background:var(--gold-grad-chip); -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent; color:transparent;
+  font-size:22px; font-weight:800; letter-spacing:3px; white-space:nowrap;
+  filter:drop-shadow(0 1px 0 rgba(232,150,12,.18));}
+.kicker-row .line{flex:1; height:1px; background:linear-gradient(90deg,var(--gold-line),transparent);}
+.kicker-row .meta{color:var(--text-dim); font-size:14px; font-weight:600; white-space:nowrap;}
+.hero .brand{color:var(--text-dim); font-size:15px; font-weight:700; letter-spacing:3px; margin-bottom:8px;}
+.hero h1{font-size:54px; font-weight:900; line-height:1.12; letter-spacing:1px; color:var(--text);}
+.hero .lead{margin-top:18px; font-size:17px; color:var(--text-dim); line-height:1.78;}
+.hero .lead em{background:var(--gold-grad-chip); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;
+  font-style:normal; font-weight:900; padding:0 1px;
+  filter:drop-shadow(0 1px 0 rgba(232,150,12,.18));}
+.hero .lead b{color:var(--text); font-weight:700;}
+
+/* KPI Panel */
+.kpi{margin:26px 0 10px; display:grid; grid-template-columns:repeat(5,1fr); gap:10px;}
+.kpi .k{background:var(--card); border:1px solid var(--border);
+  border-radius:14px; padding:16px 14px 14px; text-align:center; box-shadow:var(--shadow-card);
+  transition:transform .2s, box-shadow .2s;}
+.kpi .k:hover{transform:translateY(-2px); box-shadow:var(--shadow);}
+.kpi .k .num{font-size:32px; font-weight:900; line-height:1; color:var(--main); letter-spacing:-.5px;
+  background:var(--blue-grad-chip); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;}
+.kpi .k:nth-child(2) .num{background:var(--gold-grad-chip); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;}
+.kpi .k:nth-child(3) .num{background:var(--violet-grad-chip); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;}
+.kpi .k:nth-child(4) .num{background:var(--green-grad-chip); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;}
+.kpi .k:nth-child(5) .num{background:linear-gradient(135deg,#F87171 0%,#E11D48 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;}
+.kpi .k .lbl{font-size:12.5px; color:var(--text-mid); margin-top:7px; line-height:1.4; font-weight:600;}
+.kpi .k .s{font-size:11px; color:var(--text-dim); margin-top:2px;}
+
+/* banner */
+.banner{margin:30px 0 48px;
+  background:linear-gradient(135deg,rgba(45,127,249,.12) 0%,rgba(240,180,65,.10) 100%),#FFFFFF;
+  border:1px solid var(--main-line); border-radius:20px; padding:26px 30px; position:relative; overflow:hidden;
+  box-shadow:var(--shadow), 0 0 0 1px rgba(45,127,249,.08);}
+.banner::before{content:''; position:absolute; right:-50px; top:-50px; width:280px; height:280px;
+  background:radial-gradient(circle,var(--main-glow) 0%,transparent 70%); pointer-events:none;}
+.banner::after{content:''; position:absolute; left:-60px; bottom:-60px; width:240px; height:240px;
+  background:radial-gradient(circle,var(--gold-soft) 0%,transparent 70%); pointer-events:none;}
+.banner .tag{display:inline-flex; align-items:center; gap:9px; font-size:14px; font-weight:800; letter-spacing:1px; white-space:nowrap;
+  color:var(--on-gold); background:var(--gold-grad-chip); border:1px solid rgba(232,150,12,.50);
+  padding:5px 14px; border-radius:8px; margin-bottom:14px; position:relative; z-index:1;
+  box-shadow:0 4px 12px var(--gold-glow);}
+.banner .tag .dot{width:7px; height:7px; border-radius:50%; background:var(--on-gold); box-shadow:0 0 8px rgba(26,20,0,.45);}
+.banner .title{font-size:26px; font-weight:900; margin-bottom:10px; line-height:1.34; position:relative; z-index:1; color:var(--text);}
+.banner .desc{font-size:16px; color:var(--text-dim); position:relative; z-index:1; line-height:1.74;}
+.banner .desc b{color:var(--text); font-weight:700;}
+.banner .desc em{color:var(--gold); font-style:normal; font-weight:800;}
+.banner .desc em{background:var(--gold-grad-chip); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;}
+
+/* section head */
+.sec{margin-bottom:48px;}
+.sec-head{margin-bottom:22px;}
+.sec-head .idx{display:block; font-size:13px; font-weight:800; letter-spacing:3px; color:var(--main); margin-bottom:5px;}
+.sec-head h2{font-size:28px; font-weight:900; line-height:1.25; letter-spacing:.5px;}
+.sec-head .bar{width:70px; height:4px; border-radius:3px; background:var(--grad); margin-top:10px; box-shadow:var(--shadow);}
+.sec-head .sub{font-size:15px; color:var(--text-dim); margin-top:10px; line-height:1.72;}
+.sec-head .sub b{color:var(--text); font-weight:700;}
+
+/* 方案分布 */
+.camp{display:flex; align-items:center; gap:14px; padding:12px 0; border-bottom:1px dashed var(--border);}
+.camp:last-child{border-bottom:none;}
+.camp .cn{width:200px; flex-shrink:0; font-size:16px; font-weight:800;}
+.camp .track{flex:1; height:24px; background:var(--raise); border-radius:6px; overflow:hidden; border:1px solid var(--border);}
+.camp .fill{height:100%; background:var(--grad); border-radius:6px; box-shadow:var(--shadow);}
+.camp .num{width:52px; flex-shrink:0; text-align:right; font-size:21px; font-weight:900; color:var(--main);}
+.camp .num s{font-size:12px; font-weight:700; color:var(--text-dim); text-decoration:none; margin-left:2px;}
+.camp-sub{font-size:13.5px; color:var(--text-dim); margin:2px 0 0 214px; line-height:1.6;}
+
+/* 车卡 */
+/* 群组标题(白底+左侧色条,无大色块) */
+.grp{font-size:17px; font-weight:800; color:var(--text); margin:26px 0 12px; display:flex; align-items:center; gap:10px;
+  padding:6px 0 6px 14px; background:transparent; border:none; position:relative;
+  border-left:4px solid var(--main);}
+.grp.bl{border-left-color:#2D7FF9;}
+.grp.go{border-left-color:#E89B0E;}
+.grp.pu{border-left-color:#A855F7;}
+.grp.ot{border-left-color:#F97316;}
+.grp.rs{border-left-color:#E11D48;}
+.grp .gl{flex:1; height:1px; background:linear-gradient(90deg,var(--border-strong),transparent);}
+.grp .ct{font-size:12px; font-weight:700; color:var(--text-dim); letter-spacing:1px; padding:0 8px;
+  border:1px solid var(--border); border-radius:6px; background:var(--raise); line-height:1.7;}
+.cars{display:grid; grid-template-columns:repeat(2,1fr); gap:11px;}
+.cc{background:var(--card); border:1px solid var(--border); border-radius:13px;
+  padding:14px 16px; box-shadow:var(--shadow-card); display:flex; flex-direction:column;
+  transition:transform .2s, box-shadow .2s;}
+.cc:hover{transform:translateY(-2px); box-shadow:var(--shadow);}
+.cc .n{font-size:17px; font-weight:800; line-height:1.35; color:var(--text);}
+.cc .b{font-size:12.5px; color:var(--text-dim); margin-top:2px;}
+.cc .s{font-size:14px; color:var(--main); font-weight:700; margin-top:9px; line-height:1.5;}
+.cc .tags{display:flex; flex-wrap:wrap; gap:5px; margin:10px 0;}
+.cc .tg{font-size:12px; font-weight:700; color:var(--main); background:var(--main-soft);
+  border:1px solid var(--main-line); border-radius:6px; padding:3px 8px; line-height:1.45;}
+.cc .tg.q{color:var(--on-light); background:var(--violet-grad-chip); border-color:rgba(168,85,247,.40);
+  box-shadow:0 2px 6px var(--violet-glow); font-weight:800;}
+.cc .t{font-size:12.5px; color:var(--text-mid); background:var(--raise); border:1px solid var(--border);
+  border-radius:7px; padding:5px 9px; margin-top:auto; line-height:1.5;}
+
+/* 矩阵 */
+.legend{display:flex; flex-wrap:nowrap; gap:6px; margin-bottom:14px; overflow:hidden;}
+.lg{display:flex; align-items:center; gap:6px; font-size:12px; color:var(--text-mid); white-space:nowrap; flex-shrink:0;
+  background:var(--card); border:1px solid var(--border); border-radius:8px; padding:5px 8px;
+  box-shadow:var(--shadow-raise);}
+.mk{display:inline-flex; align-items:center; justify-content:center; min-width:20px; height:20px; padding:0 4px;
+  border-radius:6px; font-size:12px; font-weight:800; line-height:1;}
+.m-y{color:#fff; background:var(--main); box-shadow:var(--shadow);}
+.m-h{color:#fff; background:var(--green);}
+.m-p{color:var(--main); background:var(--main-chip); border:1px solid var(--main-line);}
+.m-o{color:var(--violet); background:var(--violet-soft); border:1px solid var(--violet-line); font-size:10.5px; letter-spacing:.3px;}
+.m-t{color:var(--gold); background:var(--gold-soft); border:1px dashed var(--gold-line); font-size:10.5px; letter-spacing:.3px;}
+.m-n{color:var(--text-dim); background:transparent; font-weight:600; opacity:.55;}
+.mxwrap{margin-bottom:14px;}
+.mxt{font-size:18px; font-weight:900; margin:24px 0 11px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+.mxt::before{content:''; width:5px; height:19px; border-radius:3px; flex-shrink:0;}
+.mxt.g{color:var(--on-gold); padding:4px 12px 4px 0; border-radius:0;}
+.mxt.g::before{background:var(--gold-grad); box-shadow:none;}
+.mxt.b{color:var(--on-light); background:var(--blue-grad-chip); padding:4px 12px; border-radius:8px;
+  border:1px solid rgba(91,155,255,.40); box-shadow:0 3px 10px var(--blue-glow);} .mxt.b::before{background:var(--on-light); box-shadow:0 0 6px rgba(255,255,255,.45);}
+.mxt s{font-size:13px; font-weight:600; color:var(--text-dim); text-decoration:none;}
+table.mx{width:100%; border-collapse:separate; border-spacing:0; background:var(--card);
+  border:1px solid var(--border); border-radius:14px; overflow:hidden; table-layout:fixed; box-shadow:var(--hair);}
+table.mx th,table.mx td{border-bottom:1px solid var(--border); padding:7px 3px; text-align:center; vertical-align:middle;}
+table.mx tr:last-child td{border-bottom:none;}
+table.mx thead th{background:var(--card);
+  font-size:11.5px; font-weight:800; line-height:1.35; color:var(--text-mid); white-space:nowrap;
+  border-bottom:2px solid var(--main-line);}
+table.mx thead th s{display:block; font-size:10.5px; font-weight:600; color:var(--text-dim); text-decoration:none; margin-top:2px;}
+table.mx th.nm,table.mx td.nm{text-align:left; padding-left:12px; padding-right:6px;}
+table.mx td.nm{font-size:13.5px; font-weight:700; line-height:1.35; color:var(--text);}
+table.mx td.nm i{display:block; font-style:normal; font-size:10.5px; font-weight:600; color:var(--text-dim); margin-top:2px; line-height:1.4;}
+table.mx tr.cg td{background:transparent;
+  font-size:12px; font-weight:800; color:var(--gold);
+  text-align:left; padding:6px 12px 6px 14px; letter-spacing:1px; border-top:1px solid var(--border);
+  border-left:3px solid var(--gold);}
+table.mx tr.ql td{background:transparent;}
+table.mx tr.ql td.nm{box-shadow:inset 4px 0 var(--main); color:var(--text); font-weight:800;}
+table.mx tr.ql2 td{background:transparent;}
+.qb{display:inline-block; font-size:10px; font-weight:800; color:#fff; background:var(--main);
+  border-radius:5px; padding:1px 6px; margin-left:5px; vertical-align:1px; box-shadow:var(--shadow);}
+table.mx tr.total td{background:transparent; font-weight:800; color:var(--text); border-top:2px solid var(--main-line);}
+table.mx tr.total td.nm{color:var(--main); font-size:13px;}
+table.mx tr.total .t-num{font-size:22px; font-weight:900; color:var(--main); line-height:1; margin-bottom:5px; letter-spacing:-.5px;}
+table.mx tr.total .t-sub{display:flex; justify-content:center; gap:3px; flex-wrap:nowrap; line-height:1;}
+table.mx tr.total .t-sub i{font-style:normal; font-size:9.5px; font-weight:800; padding:2px 5px; border-radius:4px; white-space:nowrap;}
+table.mx tr.total .t-sub i.y{color:var(--on-light); background:var(--green-grad-chip); border-color:rgba(16,185,129,.40);
+  box-shadow:0 2px 6px var(--green-glow);}
+table.mx tr.total .t-sub i.p{color:var(--on-light); background:var(--violet-grad-chip); border-color:rgba(168,85,247,.40);
+  box-shadow:0 2px 6px var(--violet-glow);}
+table.mx tr.total .t-sub i.o{color:var(--on-light); background:var(--orange-grad-chip); border-color:rgba(251,146,60,.40);
+  box-shadow:0 2px 6px var(--orange-glow);}
+
+/* 结论 */
+.conc{background:var(--card); border:1px solid var(--border); border-radius:15px;
+  padding:22px 24px; margin-bottom:14px; box-shadow:var(--shadow-card);}
+.conc.gap{border-color:var(--gold-line); background:linear-gradient(135deg,rgba(245,200,15,.10),rgba(255,255,255,1));}
+.conc .ct{display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:800; letter-spacing:1px;
+  color:var(--on-light); background:var(--blue-grad-chip); border:1px solid rgba(91,155,255,.40);
+  padding:5px 14px; border-radius:8px; box-shadow:0 3px 10px var(--blue-glow);}
+.conc.gap .ct{color:var(--on-gold); background:var(--gold-grad-chip); border-color:rgba(232,150,12,.40);
+  box-shadow:0 3px 10px var(--gold-glow);}
+.conc ul{list-style:none; margin-top:4px;}
+.conc li{position:relative; padding-left:18px; margin-top:12px; font-size:15.5px; color:var(--text-mid); line-height:1.72;}
+.conc li::before{content:''; position:absolute; left:0; top:8px; width:7px; height:7px; border-radius:50%;
+  background:var(--main); box-shadow:var(--glow-main);}
+.conc.gap li::before{background:var(--gold-bright); box-shadow:var(--glow-gold);}
+.conc li b{color:var(--text); font-weight:800; display:block; font-size:16px; margin-bottom:2px;}
+
+/* 新高阶信号对照表 */
+table.sig-tb{width:100%; border-collapse:separate; border-spacing:0; background:var(--card);
+  border:1px solid var(--border); border-radius:14px; overflow:hidden; table-layout:fixed; box-shadow:var(--hair);}
+table.sig-tb th,table.sig-tb td{border-bottom:1px solid var(--border); padding:10px 10px; text-align:left; vertical-align:top;}
+table.sig-tb tr:last-child td{border-bottom:none;}
+table.sig-tb thead th{background:var(--card);
+  font-size:12px; font-weight:800; color:var(--text-mid); line-height:1.4; border-bottom:2px solid var(--gold-line);}
+table.sig-tb td{font-size:13.5px; color:var(--text-mid); line-height:1.6;}
+table.sig-tb td b{color:var(--text); font-weight:700;}
+table.sig-tb td .cap{font-size:12px; font-weight:800; color:var(--main); margin-bottom:3px;}
+table.sig-tb td .cap.r{color:var(--gold);}
+table.sig-tb col.c1{width:22%;}
+table.sig-tb col.c2{width:40%;}
+table.sig-tb col.c3{width:38%;}
+table.sig-tb th:nth-child(3),table.sig-tb td:nth-child(3){text-align:center; vertical-align:middle;}
+table.sig-tb td:nth-child(3) .cap{margin-bottom:0;}
+
+/* OTA 表格 */
+.ota-tb{background:var(--card); background-image:var(--glass); border:1px solid var(--border); border-radius:14px;
+  overflow:hidden; box-shadow:var(--hair); margin-bottom:12px;}
+.ota-tb .oh{padding:14px 18px; background:var(--card);
+  border-bottom:2px solid var(--main-line); display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+.ota-tb .on{font-size:17px; font-weight:900; color:var(--text);}
+
+.ota-tb .otag{font-size:11px; font-weight:800; padding:4px 10px; border-radius:6px; letter-spacing:.4px;}
+.ota-tb .otag.dr{color:var(--on-light); background:var(--blue-grad-chip); border:1px solid rgba(91,155,255,.40);
+  box-shadow:0 3px 8px var(--blue-glow);}
+.ota-tb .otag.cb{color:var(--on-light); background:var(--violet-grad-chip); border:1px solid rgba(168,85,247,.40);
+  box-shadow:0 3px 8px var(--violet-glow);}
+.ota-tb table{width:100%; border-collapse:collapse; table-layout:fixed;}
+.ota-tb td{padding:10px 14px; border-bottom:1px solid var(--border); vertical-align:top; font-size:13.5px; line-height:1.6;}
+.ota-tb tr:last-child td{border-bottom:none;}
+.ota-tb .dt{width:78px; padding-right:8px; vertical-align:middle;}
+.ota-tb .dt .ch{display:inline-flex; align-items:center; gap:5px; font-size:11.5px; font-weight:800; letter-spacing:.5px;
+  padding:4px 11px; border-radius:7px; line-height:1.2; white-space:nowrap;
+  box-shadow:0 2px 6px rgba(15,23,42,.06);}
+.ota-tb .dt .ch::before{content:''; width:5px; height:5px; border-radius:50%; background:currentColor; opacity:.8;}
+.ota-tb .dt .ch.new{color:var(--on-gold); background:var(--gold-grad-chip);
+  box-shadow:0 3px 10px var(--gold-glow);}
+.ota-tb .dt .ch.up{color:var(--on-light); background:var(--blue-grad-chip);
+  box-shadow:0 3px 10px var(--blue-glow);}
+.ota-tb .md{color:var(--text-dim);}
+.ota-tb .md b{color:var(--text); font-weight:700;}
+
+/* 信号卡 */
+.sig{position:relative; overflow:hidden; background:var(--card);
+  border:1px solid var(--border); border-left:4px solid var(--main);
+  border-radius:15px; padding:20px 24px; margin-bottom:13px; box-shadow:var(--shadow-card);
+  transition:transform .2s, box-shadow .2s;}
+.sig:hover{transform:translateY(-1px); box-shadow:var(--shadow);}
+.sig .gh{position:absolute; right:18px; top:-6px; font-size:72px; font-weight:900; line-height:1;
+  letter-spacing:-4px; background:var(--grad); -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent; color:transparent; opacity:.18; pointer-events:none;}
+.sig .st{display:inline-flex; align-items:center; gap:7px; font-size:12px; font-weight:800; letter-spacing:1px;
+  color:var(--on-gold); background:var(--gold-grad-chip); border:1px solid rgba(232,150,12,.40);
+  padding:5px 12px; border-radius:999px; margin-bottom:10px;
+  box-shadow:0 4px 10px var(--gold-glow);}
+.sig .st.bl{color:var(--on-light); background:var(--blue-grad-chip); border-color:rgba(91,155,255,.40);
+  box-shadow:0 4px 10px var(--blue-glow);}
+.sig .st.gr{color:var(--on-light); background:var(--green-grad-chip); border-color:rgba(16,185,129,.40);
+  box-shadow:0 4px 10px var(--green-glow);}
+.sig .st.pu{color:var(--on-light); background:var(--violet-grad-chip); border-color:rgba(168,85,247,.40);
+  box-shadow:0 4px 10px var(--violet-glow);}
+.sig .st i{width:6px; height:6px; border-radius:50%; background:currentColor; box-shadow:0 0 6px rgba(0,0,0,.18);}
+.sig h4{position:relative; font-size:19px; font-weight:900; line-height:1.45; margin-bottom:7px; padding-right:70px; color:var(--text);}
+.sig p{position:relative; font-size:15px; color:var(--text-mid); line-height:1.78;}
+.sig p b{color:var(--text); font-weight:700;}
+
+/* 需确认 */
+.warn{background:var(--gold-soft); border:1px solid var(--gold-line); border-radius:15px;
+  padding:20px 24px; margin-bottom:14px; box-shadow:var(--hair);}
+.warn .wt{display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:800; letter-spacing:1px;
+  color:var(--on-gold); background:var(--gold-grad-chip); border:1px solid rgba(232,150,12,.40);
+  padding:5px 14px; border-radius:8px; margin-bottom:10px;
+  box-shadow:0 3px 10px var(--gold-glow);}
+.warn .wt .dot{width:7px; height:7px; border-radius:50%; background:var(--on-gold); box-shadow:0 0 6px rgba(26,20,0,.40);}
+.warn ul{list-style:none;}
+.warn li{position:relative; padding-left:18px; margin-top:10px; font-size:14.5px; color:var(--text-dim); line-height:1.68;}
+.warn li::before{content:'?'; position:absolute; left:0; top:1px; width:14px; height:14px; border-radius:50%;
+  background:var(--gold-grad-chip); color:var(--on-gold); font-size:11px; font-weight:900; text-align:center; line-height:14px;
+  box-shadow:0 2px 6px var(--gold-glow);}
+.warn li b{color:var(--text); font-weight:700;}
+
+/* footer */
+.footer{margin-top:44px; padding-top:22px; border-top:1px solid var(--border); color:var(--text-dim); font-size:13px; line-height:1.85;}
+.footer .disclaimer{margin-bottom:12px;}
+.footer .frow{display:flex; justify-content:flex-end; align-items:center; flex-wrap:wrap; gap:8px;}
+.footer .sign{font-weight:800; color:var(--main); white-space:nowrap;}
+
+@media(max-width:768px){
+  .hero h1{font-size:32px;} .kicker{font-size:17px;}
+  .banner .title{font-size:20px;} .sec-head h2{font-size:22px;}
+  .kpi{grid-template-columns:repeat(3,1fr);}
+  .cars{grid-template-columns:1fr;}
+  .camp .cn{width:120px; font-size:14px;} .camp-sub{margin-left:0;}
+  table.mx{font-size:11px;}
+  .footer .frow{flex-direction:column; align-items:flex-end;}
+}
+#btnBar{position:fixed; right:22px; bottom:22px; z-index:9999; display:flex; gap:10px;}
+#btnBar button{background:var(--grad); color:#FFFFFF; border:none; border-radius:999px; padding:12px 20px;
+  font-size:14px; font-weight:800; cursor:pointer; box-shadow:var(--shadow); font-family:inherit;}
+#btnBar button#btnFull{background:var(--card); color:var(--text-dim); border:1px solid var(--border); box-shadow:none;}
+#btnBar button s{display:block; font-size:10px; font-weight:600; opacity:.85; text-decoration:none; margin-top:1px;}
+#btnBar button:disabled{opacity:.6; cursor:wait;}
+@media print{#btnBar{display:none;}}
+</style>
+</head>
+<body>
+<div class="container"><div class="wrap">
+
+<!-- ===== 0: Hero + KPI ===== -->
+<div class="hero" data-blk="0">
+  <div class="kicker-row"><span class="kicker">智驾月报</span><span class="line"></span><span class="meta">2026年10月30日 · 内部速递</span></div>
+  <div class="brand">千里速闻 · MONTHLY DIGEST</div>
+  <h1>2026年10月<br>智驾月报</h1>
+  <p class="lead">10 月共 <b>23 款</b>智驾新车上市或预售, <b>12 条</b> OTA 与功能升级。车企自研方案 <em>12 款</em>,覆盖 8 家车企:小鹏 · 理想 · 长安 · 长城 · 红旗 · 广汽 · 零跑 · 北汽。价格带从海鸥的 <b>6.29 万</b>到问界 M8 的 <b>38.98 万</b>,本期 23 款与千里 ZAD 对照 <b>5 项高阶智驾能力</b>。</p>
+  <div class="kpi">
+    <div class="k"><div class="num">23</div><div class="lbl">智驾新车</div><div class="s">17上市 + 6预售</div></div>
+    <div class="k"><div class="num">12</div><div class="lbl">OTA / 升级</div><div class="s">9条含驾驶更新</div></div>
+    <div class="k"><div class="num">12</div><div class="lbl">车企自研方案</div><div class="s">小鹏 · 理想 · 长安 · 长城 · 红旗 · 广汽 · 零跑 · 北汽</div></div>
+    <div class="k"><div class="num">20</div><div class="lbl">带激光雷达</div><div class="s">含部分版本</div></div>
+    <div class="k"><div class="num">5</div><div class="lbl">带责任兜底</div><div class="s">智驾险 / 无忧礼</div></div>
+  </div>
+</div>
+
+<!-- ===== 1: 本月重点横幅 ===== -->
+<div class="banner" data-blk="1">
+  <span class="tag"><span class="dot"></span>本月重点</span>
+  <div class="title">城区领航下探至 6 万级,端到端方案在 10 万级批量落地</div>
+  <p class="desc">城区领航 <b>23 款</b>全部具备、分层或待 OTA,海鸥 ¥6.29 万把门槛再拉低一档;车位到车位 <b>16 款</b>、跨层记忆泊车 <b>12 款</b>。自研方案 12 款占多数,一段式端到端已铺到 10 万级。<em>预售车型功能以正式上市为准</em>。</p>
+</div>
+
+<!-- ===== 2: 本月信号（前置） ===== -->
+<section class="sec" data-blk="2" data-label="本月三个信号"><div class="sec-head"><span class="idx">01</span><h2>本月三个信号</h2><div class="bar"></div></div>
+<div class="sig"><span class="gh">01</span><span class="st go"><i></i>门槛下探</span><h4>城区领航首次下探到 6 万级,且不再绑定激光雷达</h4><p>海鸥 ¥6.29 万起搭天神之眼 B 激光版,城市领航 CNOA 与 AVP 代客泊车一起下放;秦 PLUS DM-i ¥7.69 万起以选装解锁城区领航;捷达 M6 ¥8.08 万起靠征程 6M 纯视觉 + 征程 HSD 提供城市 NOA。同一梯队里硬件路径已经分岔——激光雷达(海鸥、秦 PLUS 选装)、纯视觉 + 中算力(捷达 M6)并行,城区领航不再由单一传感器配置决定。</p></div>
+
+<div class="sig"><span class="gh">02</span><span class="st bl"><i></i>方案格局</span><h4>自研阵营 12 款占多数,地平线 HSD 一段式端到端首次成规模上车</h4><p>本月 23 款里车企自研 12 款、地平线 HSD 系 3 款,华为乾崑本月仅问界 M8、阿维塔 07L 两款。地平线 HSD 一段式端到端通过捷达 M6、iCAR V25、iCAR V27 三款落地,覆盖 8 万到 20 万区间;同一套第三方方案开始同时服务合资与自主,这是本月方案层面最明显的结构变化。</p></div>
+
+<div class="sig"><span class="gh">03</span><span class="st gr"><i></i>OTA 方向</span><h4>OTA 主战场转向泊车链路,算法本体也开始通过 OTA 升级</h4><p>12 条 OTA 里 9 条含驾驶能力更新,其中泊车占绝对多数:自定义泊车、离车泊入、代客泊车、园区领航辅助泊车、地库智慧泊车密集推送,零跑两批次还把城区 NAP 与记忆泊车限速一并下放。更值得注意的是深蓝 L06 的一段式端到端引入世界模型 + 强化学习、通行效率与窄车位泊车成功率由 OTA 改写——算法本体开始成为可迭代的交付物,而不只是功能开关。</p></div>
+</section>
+
+<!-- ===== 3: 智驾方案分布 ===== -->
+<section class="sec" data-blk="3" data-label="智驾方案分布"><div class="sec-head"><span class="idx">02</span><h2>智驾方案分布</h2><div class="bar"></div>
+<p class="sub">按 23 款新车所搭方案归并。<b>同一款车只归入一个方案</b>,双版本车型按主推方案归类。</p></div>
+<div class="camp"><div class="cn">车企自研方案</div><div class="track"><div class="fill" style="width:100.0%"></div></div><div class="num">12<s>款</s></div></div>
+<div class="camp-sub">12 款车用了 9 种车企自研方案 · 小鹏图灵 VLA / 理想马赫 VLA 2.5 / 长安天枢领航 / 长城 Coffee Pilot / 红旗司南 / 广汽 GSD / 北汽元境 / 零跑 Pilot / 深蓝天枢端到端</div>
+<div class="camp"><div class="cn">华为乾崑 ADS 5</div><div class="track"><div class="fill" style="width:16.7%"></div></div><div class="num">2<s>款</s></div></div>
+<div class="camp-sub">ADS 5 高阶版(问界 M8) / ADS Max 高阶版(阿维塔 07L) · WEWA 2.0 架构</div>
+<div class="camp"><div class="cn">地平线 HSD 系</div><div class="track"><div class="fill" style="width:25.0%"></div></div><div class="num">3<s>款</s></div></div>
+<div class="camp-sub">征程 6M / 征程 6P · 一段式端到端 · 奇瑞超级猎鹰 700+ 亦基于 HSD</div>
+<div class="camp"><div class="cn">Momenta 世界模型</div><div class="track"><div class="fill" style="width:16.7%"></div></div><div class="num">2<s>款</s></div></div>
+<div class="camp-sub">Momenta R7 世界模型 · 东风天元智驾 T800 / 上汽大众行云智行</div>
+<div class="camp"><div class="cn">比亚迪 天神之眼</div><div class="track"><div class="fill" style="width:16.7%"></div></div><div class="num">2<s>款</s></div></div>
+<div class="camp-sub">天神之眼 B(DiPilot 300)激光版 / 天神之眼 C 标配 + B 激光版选装</div>
+<div class="camp"><div class="cn">合资 · 大众安徽</div><div class="track"><div class="fill" style="width:16.7%"></div></div><div class="num">2<s>款</s></div></div>
+<div class="camp-sub">与众 09 图灵 AI 芯片 750TOPS · VLA 大模型 / 与众 06·07 酷睿程 HS8 + GAIA 2.0 世界模型</div>
+</section>
+
+<!-- ===== 4: 新车一览 ===== -->
+<section class="sec" data-blk="4" data-label="新车一览"><div class="sec-head"><span class="idx">03</span><h2>10 月智驾新车一览</h2><div class="bar"></div>
+<p class="sub">按所搭智驾方案分 6 组,同组内按上市或预售日期由近及远。</p></div>
+
+<div class="grp bl">车企自研方案<span class="gl"></span><span class="ct">12 款</span></div><div class="cars">
+<div class="cc"><div class="n">小鹏 MONA L05</div><div class="b">小鹏汽车 XPENG</div><div class="s">图灵 AI 智驾 · 第二代 VLA</div>
+<div class="tags"><span class="tg">城市 + 高速辅助驾驶</span><span class="tg">车位到车位</span><span class="tg">无导航 NGP 漫游(Ultra SE)</span></div>
+<div class="t">10月29日上市 · ¥16.98-19.18万 · 5款 · 中型SUV(纯电+增程)</div></div>
+<div class="cc"><div class="n">新款理想 i6</div><div class="b">理想汽车 LI AUTO</div><div class="s">马赫智能辅助驾驶 · VLA 2.5</div>
+<div class="tags"><span class="tg">马赫 M100 · 1280TOPS</span><span class="tg">任意车位到任意车位</span><span class="tg">跨层记忆泊车</span><span class="tg">陌生园区自主寻路</span></div>
+<div class="t">10月28日上市 · ¥23.98万 · 11月初交付 · 双芯套装选装</div></div>
+<div class="cc"><div class="n">2027款阿尔法 S5</div><div class="b">北汽新能源 ARCFOX 极狐</div><div class="s">北汽元境 · 端到端 4.0 大模型</div>
+<div class="tags"><span class="tg">192线激光雷达全系标配</span><span class="tg">城区领航辅助</span><span class="tg">2km 跨楼层记忆泊车</span></div>
+<div class="t">10月23日预售 · ¥12.18-14.48万 · 3款</div></div>
+<div class="cc"><div class="n">启源 Q07 天枢领航版</div><div class="b">长安启源 CHANGAN</div><div class="s">天枢领航 Pro · 一段式端到端</div>
+<div class="tags"><span class="tg">城区 + 高速 NCA 贯通</span><span class="tg">HZP 记忆泊车</span><span class="tg">CDC 智能魔毯悬架</span></div>
+<div class="t">10月20日上市 · ¥12.98-15.98万 · 4款 · 2027款</div></div>
+<div class="cc"><div class="n">传祺越7 四驱卫星通信版</div><div class="b">广汽传祺 GAC TRUMPCHI</div><div class="s">星灵智行 ADiGO GSD 3.0</div>
+<div class="tags"><span class="tg">城市 + 高速 NDA</span><span class="tg">192线激光雷达</span><span class="tg">天通卫星通信</span><span class="tg">记忆泊车待 OTA</span></div>
+<div class="t">近日上市 · ¥21.78万 · 四驱卫星通信版</div></div>
+<div class="cc"><div class="n">魏牌高山8 HEV</div><div class="b">长城魏牌 WEY</div><div class="s">Coffee Pilot 3 辅助驾驶</div>
+<div class="tags"><span class="tg">192线激光雷达</span><span class="tg">车位到车位全流程</span><span class="tg">园区漫游自主找空位</span><span class="tg">3公里记忆泊车</span></div>
+<div class="t">10月19日预售 · ¥27.58万起 · 中大型MPV</div></div>
+<div class="cc"><div class="n">零跑 A10s</div><div class="b">零跑 LEAPMOTOR</div><div class="s">Leapmotor Pilot 组合辅助驾驶</div>
+<div class="tags"><span class="tg">等效128线激光雷达</span><span class="tg">车位到车位领航</span><span class="tg">跨层记忆泊车 HPA</span></div>
+<div class="t">10月18日上市 · ¥9.28万 · 1款 · 43项辅助功能</div></div>
+<div class="cc"><div class="n">埃安 Ray7</div><div class="b">广汽埃安 GAC AION</div><div class="s">广汽 GSD · 文远知行 L4 同源端到端</div>
+<div class="tags"><span class="tg">192线激光雷达 + 3颗4D毫米波</span><span class="tg">无导航漫游找车位</span><span class="tg">车位到车位待 OTA</span></div>
+<div class="t">10月17日预售 · ¥12.88-15.88万 · 5款 · Ray系列首款</div></div>
+<div class="cc"><div class="n">新款坦克500</div><div class="b">长城坦克 TANK</div><div class="s">Coffee Pilot 4 辅助驾驶</div>
+<div class="tags"><span class="tg">禾赛192线前激光雷达</span><span class="tg">Thor-U · 700TOPS</span><span class="tg">新增漫游泊车</span><span class="tg">车位到车位</span></div>
+<div class="t">10月16日预订 · 3000抵9000 · Hi4-T/Hi4-Z 智享版</div></div>
+<div class="cc"><div class="n">2027款启源 A06</div><div class="b">长安启源 CHANGAN</div><div class="s">天枢智能驾驶辅助激光版(高配)</div>
+<div class="tags"><span class="tg">禾赛激光雷达(高配)</span><span class="tg">城市 NOA 待 OTA</span><span class="tg">记忆泊车 HZP 待 OTA</span></div>
+<div class="t">10月10日上市 · ¥10.99-14.99万 · 10款</div></div>
+<div class="cc"><div class="n">红旗天工07</div><div class="b">一汽红旗 HONGQI</div><div class="s">红旗司南智驾 5.0 · 卓驭高悟性大模型</div>
+<div class="tags"><span class="tg">384线可变焦激光雷达</span><span class="tg">车位到车位领航</span><span class="tg">ETC 无感通行</span><span class="tg">PNP 泊车领航</span></div>
+<div class="t">10月10日上市 · ¥16.99-19.99万 · 3款 · 中大型轿车</div></div>
+<div class="cc"><div class="n">2027款深蓝 L06</div><div class="b">长安深蓝 DEEPAL</div><div class="s">天枢领航 · 一段式端到端</div>
+<div class="tags"><span class="tg">世界模型 + 强化学习</span><span class="tg">城市 + 高速 NCA</span><span class="tg">车位到车位待 OTA</span></div>
+<div class="t">10月9日上市 · ¥11.49-16.19万 · 8款(含追风版)</div></div>
+</div>
+
+<div class="grp go">华为乾崑 ADS 5<span class="gl"></span><span class="ct">2 款</span></div><div class="cars">
+<div class="cc"><div class="n">阿维塔 07L Max</div><div class="b">长安 · 阿维塔 AVATR</div><div class="s">华为乾崑智驾 ADS Max · ADS 5</div>
+<div class="tags"><span class="tg">896线激光雷达</span><span class="tg">城区 NCA 选装</span><span class="tg">园区领航选装</span><span class="tg">漫游巡航 RCA</span></div>
+<div class="t">10月29日上市 · ¥21.59万起 · 07L 全系4款</div></div>
+<div class="cc"><div class="n">新款问界 M8</div><div class="b">赛力斯 · 问界 AITO</div><div class="s">华为乾崑智驾 ADS 5 高阶版</div>
+<div class="tags"><span class="tg">4激光雷达 + 5颗4D毫米波</span><span class="tg">车位到车位出行</span><span class="tg">园区领航 Campus NCA</span></div>
+<div class="t">9月30日预售 · ¥38.98万起 · 大型SUV</div></div>
+</div>
+
+<div class="grp ot">地平线 HSD 系<span class="gl"></span><span class="ct">3 款</span></div><div class="cars">
+<div class="cc"><div class="n">捷达 M6</div><div class="b">一汽-大众捷达 JETTA</div><div class="s">地平线 HSD · 征程 6M</div>
+<div class="tags"><span class="tg">城市 NOA(555 Ultra)</span><span class="tg">车位到车位(Ultra)</span><span class="tg">3km 跨层记忆泊车</span></div>
+<div class="t">10月22日上市 · ¥8.08-9.98万 · 3款 · 中型纯电轿车</div></div>
+<div class="cc"><div class="n">iCAR V25</div><div class="b">奇瑞 iCAR</div><div class="s">超级猎鹰 700+ · 征程 6P 560TOPS</div>
+<div class="tags"><span class="tg">HSD 一段式端到端</span><span class="tg">车位到车位领航</span><span class="tg">城市漫游</span></div>
+<div class="t">10月19日预售 · ¥13.98-17.58万 · 4款 · 中型增程SUV</div></div>
+<div class="cc"><div class="n">iCAR V27 长续航版</div><div class="b">奇瑞新能源 · iCAR</div><div class="s">超级猎鹰 700+ · HSD V2.1</div>
+<div class="tags"><span class="tg">禾赛 ATX 激光雷达</span><span class="tg">CNOA 城市领航</span><span class="tg">全场景倒车</span><span class="tg q">3年辅助驾驶无忧保障</span></div>
+<div class="t">9月30日上市 · ¥18.98-20.38万 · 2款 · 中大型增程SUV</div></div>
+</div>
+
+<div class="grp pu">Momenta 世界模型<span class="gl"></span><span class="ct">2 款</span></div><div class="cars">
+<div class="cc"><div class="n">风神 L8+</div><div class="b">东风风神 AEOLUS</div><div class="s">天元智驾 T800 · Momenta R7</div>
+<div class="tags"><span class="tg">城市 + 高速无图 NOA</span><span class="tg">车位到车位零接管</span><span class="tg">3km 跨层记忆泊车</span><span class="tg q">首年辅助驾驶无忧服务</span></div>
+<div class="t">10月23日上市 · ¥12.99-15.99万 · 4款 · 两款激光雷达版</div></div>
+<div class="cc"><div class="n">ID.ERA 8X</div><div class="b">上汽大众 SAIC VOLKSWAGEN</div><div class="s">行云智行 · Momenta R7 世界模型</div>
+<div class="tags"><span class="tg">192线激光雷达全系标配</span><span class="tg">城区 + 高速 NOA</span><span class="tg">AVP 跨楼层记忆泊车</span><span class="tg q">300万无忧保障</span></div>
+<div class="t">10月12日上市 · ¥22.68-28.98万 · 4款 · 中大型增程SUV</div></div>
+</div>
+
+<div class="grp rs">比亚迪 天神之眼<span class="gl"></span><span class="ct">2 款</span></div><div class="cars">
+<div class="cc"><div class="n">全新秦PLUS DM-i</div><div class="b">比亚迪王朝 BYD DYNASTY</div><div class="s">天神之眼 C 标配 · B 激光版选装</div>
+<div class="tags"><span class="tg">城区领航随选装解锁</span><span class="tg">全场景智能泊车</span><span class="tg">140km/h 爆胎稳行</span><span class="tg q">1年城市领航安全兜底</span></div>
+<div class="t">10月27日上市 · ¥7.69-9.79万 · 3款</div></div>
+<div class="cc"><div class="n">全新海鸥</div><div class="b">比亚迪海洋网 BYD OCEAN</div><div class="s">天神之眼 B 激光版 · DiPilot 300</div>
+<div class="tags"><span class="tg">城市领航 CNOA</span><span class="tg">AVP 代客泊车</span><span class="tg">激光雷达</span><span class="tg q">辅助驾驶无忧礼</span></div>
+<div class="t">10月20日上市 · ¥6.29-9.69万 · 5款</div></div>
+</div>
+
+<div class="grp">合资 · 大众安徽<span class="gl"></span><span class="ct">2 款</span></div><div class="cars">
+<div class="cc"><div class="n">与众09</div><div class="b">大众安徽与众 UNYX</div><div class="s">VLA 大模型 · 图灵 AI 芯片 750TOPS</div>
+<div class="tags"><span class="tg">全场景 NOA</span><span class="tg">车位到车位完整引导</span><span class="tg">自定义泊车 + 遥控泊车</span></div>
+<div class="t">10月24日上市 · ¥17.99-24.99万 · 3款 · 中大型纯电轿车</div></div>
+<div class="cc"><div class="n">与众06 / 与众07</div><div class="b">大众安徽与众 UNYX</div><div class="s">酷睿程 HS8 端到端 + GAIA 2.0</div>
+<div class="tags"><span class="tg">城市 + 高速 NOA</span><span class="tg">2km 跨层记忆泊车</span><span class="tg">征程 6H · 420TOPS</span></div>
+<div class="t">10月17日上市 · ¥10.99-16.99万 · 6款 + 7款</div></div>
+</div>
+</section>
+
+<!-- ===== 5: 高阶功能对照 ===== -->
+<section class="sec" data-blk="5" data-label="高阶功能对照"><div class="sec-head"><span class="idx">04</span><h2>千里 ZAD × 10 月新车<br>高阶功能对照</h2><div class="bar"></div>
+<p class="sub"><b>页面未逐项列出 ≠ 不具备</b>,建议以官方配置表为准。</p></div>
+
+<div class="legend">
+<span class="lg"><span class="mk m-y">✓</span>明确具备</span>
+<span class="lg"><span class="mk m-p">◐</span>选装解锁 / 限高配</span>
+<span class="lg"><span class="mk m-o">OTA</span>待 OTA 解锁</span>
+<span class="lg"><span class="mk m-n">—</span>未见公布</span>
+</div>
+
+<div class="mxwrap"><div class="mxt g">高阶智驾功能对照 <s>5 项能力 · 23 款</s></div>
+<table class="mx"><colgroup><col style="width:200px"><col style="width:auto"><col style="width:auto"><col style="width:auto"><col style="width:auto"><col style="width:auto"></colgroup><thead><tr><th class="nm">车型 / 方案档位</th><th>城区领航</th><th>车位到车位</th><th>园区领航</th><th>漫游巡航</th><th>跨层记忆 · 代客泊车</th></tr></thead><tbody>
+
+<tr class="ql"><td class="nm">千里 ZAD · H7 <span class="qb">我方</span></td>
+  <td><span class="mk m-y">✓</span></td><td><span class="mk m-y">✓</span></td><td><span class="mk m-y">✓</span></td><td><span class="mk m-o">OTA</span></td><td><span class="mk m-y">✓</span></td></tr>
+
+<tr class="cg"><td colspan="6">车企自研方案 · 12 款</td></tr>
+<tr><td class="nm">小鹏 MONA L05<i>图灵 AI 智驾 · 第二代 VLA</i></td>
+  <td><span class="mk m-y">✓</span></td><td><span class="mk m-y">✓</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-p">◐</span></td><td><span class="mk m-n">—</span></td></tr>
+<tr><td class="nm">新款理想 i6<i>马赫 VLA 2.5 · M100 1280TOPS</i></td>
+  <td><span class="mk m-y">✓</span></td><td><span class="mk m-y">✓</span></td><td><span class="mk m-y">✓</span></td><td><span class="mk m-y">✓</span></td><td><span class="mk m-y">✓</span></td></tr>
+<tr><td class="nm">2027款阿尔法 S5<i>北汽元境 · 端到端 4.0</i></td>
+  <td><span class="mk m-y">✓</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-y">✓</span></td></tr>
+<tr><td class="nm">启源 Q07 天枢领航版<i>天枢领航 Pro · 一段式端到端</i></td>
+  <td><span class="mk m-y">✓</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-p">◐</span></td></tr>
+<tr><td class="nm">传祺越7 四驱卫星通信版<i>ADiGO GSD 3.0 · 端到端大模型</i></td>
+  <td><span class="mk m-y">✓</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-o">OTA</span></td></tr>
+<tr><td class="nm">魏牌高山8 HEV<i>Coffee Pilot 3 · 192线激光雷达</i></td>
+  <td><span class="mk m-y">✓</span></td><td><span class="mk m-y">✓</span></td><td><span class="mk m-p">◐</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-p">◐</span></td></tr>
+<tr><td class="nm">零跑 A10s<i>Leapmotor Pilot · 等效128线激雷</i></td>
+  <td><span class="mk m-y">✓</span></td><td><span class="mk m-y">✓</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-y">✓</span></td></tr>
+<tr><td class="nm">埃安 Ray7<i>广汽 GSD · 文远知行 L4 同源</i></td>
+  <td><span class="mk m-y">✓</span></td><td><span class="mk m-o">OTA</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-y">✓</span></td><td><span class="mk m-n">—</span></td></tr>
+<tr><td class="nm">新款坦克500<i>Coffee Pilot 4 · Thor-U 700TOPS</i></td>
+  <td><span class="mk m-y">✓</span></td><td><span class="mk m-y">✓</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-p">◐</span></td><td><span class="mk m-n">—</span></td></tr>
+<tr><td class="nm">2027款启源 A06<i>天枢智驾激光版 · 高配搭载</i></td>
+  <td><span class="mk m-o">OTA</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-o">OTA</span></td></tr>
+<tr><td class="nm">红旗天工07<i>司南智驾 5.0 · 384线可变焦激雷</i></td>
+  <td><span class="mk m-y">✓</span></td><td><span class="mk m-y">✓</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td></tr>
+<tr><td class="nm">2027款深蓝 L06<i>天枢领航 · 世界模型 + 强化学习</i></td>
+  <td><span class="mk m-y">✓</span></td><td><span class="mk m-o">OTA</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td></tr>
+
+<tr class="cg"><td colspan="6">华为乾崑 ADS 5 · 2 款</td></tr>
+<tr><td class="nm">阿维塔 07L Max<i>ADS Max 高阶版 · 896线激雷</i></td>
+  <td><span class="mk m-p">◐</span></td><td><span class="mk m-p">◐</span></td><td><span class="mk m-p">◐</span></td><td><span class="mk m-p">◐</span></td><td><span class="mk m-n">—</span></td></tr>
+<tr><td class="nm">新款问界 M8<i>ADS 5 高阶版 · WEWA 2.0</i></td>
+  <td><span class="mk m-y">✓</span></td><td><span class="mk m-y">✓</span></td><td><span class="mk m-y">✓</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td></tr>
+
+<tr class="cg"><td colspan="6">地平线 HSD 系 · 3 款</td></tr>
+<tr><td class="nm">捷达 M6<i>地平线 HSD · 征程 6M(Ultra 版)</i></td>
+  <td><span class="mk m-p">◐</span></td><td><span class="mk m-p">◐</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-p">◐</span></td></tr>
+<tr><td class="nm">iCAR V25<i>超级猎鹰 700+ · 征程 6P 560TOPS</i></td>
+  <td><span class="mk m-y">✓</span></td><td><span class="mk m-y">✓</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-y">✓</span></td><td><span class="mk m-n">—</span></td></tr>
+<tr><td class="nm">iCAR V27 长续航版<i>超级猎鹰 700+ · HSD V2.1</i></td>
+  <td><span class="mk m-y">✓</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td></tr>
+
+<tr class="cg"><td colspan="6">Momenta 世界模型 · 2 款</td></tr>
+<tr><td class="nm">风神 L8+<i>天元智驾 T800 · Momenta R7</i></td>
+  <td><span class="mk m-y">✓</span></td><td><span class="mk m-y">✓</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-y">✓</span></td></tr>
+<tr><td class="nm">ID.ERA 8X<i>Momenta R7 世界模型 · 全系标配</i></td>
+  <td><span class="mk m-y">✓</span></td><td><span class="mk m-y">✓</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-y">✓</span></td></tr>
+
+<tr class="cg"><td colspan="6">比亚迪 天神之眼 · 2 款</td></tr>
+<tr><td class="nm">全新秦PLUS DM-i<i>天神之眼 C 标配 · B 激光版选装</i></td>
+  <td><span class="mk m-p">◐</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td></tr>
+<tr><td class="nm">全新海鸥<i>天神之眼 B 激光版 · DiPilot 300</i></td>
+  <td><span class="mk m-y">✓</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-p">◐</span></td></tr>
+
+<tr class="cg"><td colspan="6">合资 · 大众安徽 · 2 款</td></tr>
+<tr><td class="nm">与众09<i>VLA 大模型 · 图灵 AI 芯片 750TOPS</i></td>
+  <td><span class="mk m-y">✓</span></td><td><span class="mk m-y">✓</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td></tr>
+<tr><td class="nm">与众06 / 与众07<i>酷睿程 HS8 + GAIA 2.0 世界模型</i></td>
+  <td><span class="mk m-y">✓</span></td><td><span class="mk m-y">✓</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-n">—</span></td><td><span class="mk m-y">✓</span></td></tr>
+
+<tr class="total"><td class="nm">进表 23 款 · 合计(具备 + 部分 + OTA)</td>
+  <td><div class="t-num">23</div><div class="t-sub"><i class="y">具19</i><i class="p">◐3</i><i class="o">OTA1</i></div></td>
+  <td><div class="t-num">16</div><div class="t-sub"><i class="y">具12</i><i class="p">◐2</i><i class="o">OTA2</i></div></td>
+  <td><div class="t-num">4</div><div class="t-sub"><i class="y">具2</i><i class="p">◐2</i></div></td>
+  <td><div class="t-num">6</div><div class="t-sub"><i class="y">具3</i><i class="p">◐3</i></div></td>
+  <td><div class="t-num">12</div><div class="t-sub"><i class="y">具6</i><i class="p">◐4</i><i class="o">OTA2</i></div></td>
+</tr>
+</tbody></table>
+</div>
+</section>
+
+<!-- ===== 6: 对照结论 ===== -->
+<section class="sec" data-blk="6" data-label="对照结论"><div class="sec-head"><span class="idx">05</span><h2>对照结论</h2><div class="bar"></div>
+<p class="sub">仅列高阶智驾功能 5 项,主动安全类不纳入。</p></div>
+
+<div class="conc"><span class="ct">核心结论 · 5 项高阶</span><ul>
+<li><b>城区领航 23/23 款全部具备、分层或待 OTA,门槛下探到 6 万级</b>明确具备 19 款;分层 3 款为阿维塔 07L、捷达 M6、秦 PLUS DM-i(均为选装或限高配);待 OTA 1 款为启源 A06。海鸥 ¥6.29 万把城区领航的价格下限再拉低一档。</li>
+<li><b>车位到车位 16 款(具 12 + 分层 2 + OTA 2),跨层记忆泊车 12 款(具 6 + 分层 4 + OTA 2)</b>泊车链路是本月亮相密度最高的环节,跨层记忆距离已被拉到 2-3km 区间(风神 L8+、捷达 M6、阿尔法 S5、与众 06·07)。千里 H7 车位到车位与跨层均已具备。</li>
+<li><b>园区领航 4 款、漫游巡航 6 款,仍是少数车型的能力</b>园区领航明确具备的只有理想 i6 与问界 M8 两款,阿维塔 07L、魏牌高山 8 为分层;漫游巡航明确具备 3 款。这两项仍是区分度最高的能力,千里 H7 园区已具备、漫游待 OTA。</li>
+</ul></div>
+</section>
+
+<!-- ===== 7: OTA 与功能升级 ===== -->
+<section class="sec" data-blk="7" data-label="OTA 与功能升级"><div class="sec-head"><span class="idx">06</span><h2>OTA 与功能升级</h2><div class="bar"></div>
+<p class="sub">12 条,覆盖 20+ 车系。<b>9 条含驾驶能力更新</b>,3 条以座舱/车控为主。</p></div>
+
+<div class="ota-tb">
+<div class="oh"><span class="on">深蓝 L06 · DEEPAL OS 4.2.1</span><span class="otag dr">含驾驶能力</span></div>
+<table>
+<tr><td class="dt"><span class="ch new">新增</span></td><td class="md"><b>一段式端到端引入世界模型 + 强化学习</b>——预判感知升级,通行效率提升 30%、复杂场景点刹与重刹频次减少 90%、窄车位泊车成功率提升 50%;红绿灯识别与路口通行优化。</td></tr>
+<tr><td class="dt"><span class="ch new">新增</span></td><td class="md"><b>全场景智能泊车辅助</b>——遥控泊车开放地面露天车位场景,直入直出距离过近时手机 App 显示橙色风险预警并取消激活鸣笛提醒。</td></tr>
+<tr><td class="dt"><span class="ch up">升级</span></td><td class="md"><b>座舱与互联</b>——3D 实况桌面分屏、AI 闲聊、四图融合车道级导航细化,新增华为 HiCar / ICCOA Carlink / 荣耀车联手机互联与车家互联。</td></tr>
+</table>
+</div>
+
+<div class="ota-tb">
+<div class="oh"><span class="on">零跑 C 系(2027款 C10/C11/C16 + 2024款 C01/C10/C11/C16)</span><span class="otag dr">含驾驶能力</span></div>
+<table>
+<tr><td class="dt"><span class="ch new">新增</span></td><td class="md"><b>城市领航辅助开放全国城市</b>——2024 款 C 系城区 NAP 支持全国城市使用,按导航路径控制车辆行驶至目的地(具备激光雷达配置车型)。</td></tr>
+<tr><td class="dt"><span class="ch new">新增</span></td><td class="md"><b>记忆泊车与泊入辅助</b>——2027 款记忆泊车新增自定义限速调节(园区与封闭停车场内部道路可自设行驶速度);泊入辅助窄车位收起后视镜后自动切换两侧后视影像。</td></tr>
+<tr><td class="dt"><span class="ch up">升级</span></td><td class="md"><b>泊车与召唤体验</b>——泊车车位识别成功率、路径规划、行人场景制动策略优化;直线召唤新增雷达墙显示(激光雷达车型)。</td></tr>
+</table>
+</div>
+
+<div class="ota-tb">
+<div class="oh"><span class="on">别克至境 L7 · 埃安 N60</span><span class="otag dr">含驾驶能力</span></div>
+<table>
+<tr><td class="dt"><span class="ch new">新增</span></td><td class="md"><b>主动安全与窄路通行</b>——至境 L7 新增 AES 自动紧急转向(60-130km/h 自动转向避让)、窄路多把掉头(算法自动规划进退路径);AEB 新增纸箱、三角牌等障碍物识别。</td></tr>
+<tr><td class="dt"><span class="ch new">新增</span></td><td class="md"><b>智绘泊车与泊车风格可调</b>——至境 L7 智绘泊车支持自主框定目标车位、拖拽调整位置角度;埃安 N60 辅助驾驶模式新增柔和/标准/敏捷三档、智能泊车提供舒缓/标准/高效三档节奏。</td></tr>
+<tr><td class="dt"><span class="ch up">升级</span></td><td class="md"><b>行车辅助与提醒</b>——至境 L7 行车辅助自恢复(NOP 降级 ACC 后满足条件自动恢复);埃安 N60 新增智能闪灯提醒、ACC 功能开关、一键防晕车模式。</td></tr>
+</table>
+</div>
+
+<div class="ota-tb">
+<div class="oh"><span class="on">传祺向往 M8 · 昊铂 A800</span><span class="otag dr">含驾驶能力</span></div>
+<table>
+<tr><td class="dt"><span class="ch new">新增</span></td><td class="md"><b>智能辅助泊车扩容</b>——向往 M8 新增自定义泊车(无划线区域虚拟车位框泊入)、离车泊入辅助、代客泊车辅助(自动学习路线并停入车位)、垂直/斜列车位可选方向泊出。</td></tr>
+<tr><td class="dt"><span class="ch up">升级</span></td><td class="md"><b>园区与地库泊车</b>——昊铂 A800 升级园区领航辅助泊车(SR 界面点选空车位即可开启泊车,支持离车泊入)与地库智慧泊车(地库车位及道路显示半径由 50 米扩大至 250 米)。</td></tr>
+<tr><td class="dt"><span class="ch new">新增</span></td><td class="md"><b>收费站选道与主动安全</b>——向往 M8 新增收费站 ETC/人工通道选道通行(NDA 下选 ETC 自行通行,人工通道降级 LCC)、FCTB/RCTB 主动制动、加速踏板防误踩。</td></tr>
+</table>
+</div>
+
+<div class="ota-tb">
+<div class="oh"><span class="on">乐道椰子 3.3.0 · 阿维塔 AVATR.OS 6.1.0</span><span class="otag dr">含驾驶能力</span></div>
+<table>
+<tr><td class="dt"><span class="ch new">新增</span></td><td class="md"><b>驾驶能力与主动安全</b>——乐道新增雨天防御性驾驶能力;阿维塔新增 GAEB 异形障碍物自动紧急制动,补齐非标准障碍物场景的兜底制动(适配 12·07L·06T 激光雷达版)。</td></tr>
+<tr><td class="dt"><span class="ch new">新增</span></td><td class="md"><b>补能与停车导航</b>——阿维塔新增智能充电导航(查看园区空闲充电车位并导航直达空位)、导航分类搜索沿途/周边/目的地充电站加油站服务区;乐道新增停车场导航,全国超 3000 座停车场支持车位级导航。</td></tr>
+<tr><td class="dt"><span class="ch up">升级</span></td><td class="md"><b>座舱与安全</b>——阿维塔哨兵云瞰新增手动触发闪灯鸣笛与车外喊话;乐道 HUD 新增简洁模式并将普通模式拆分为感知优先/导航优先。</td></tr>
+</table>
+</div>
+
+<div class="ota-tb">
+<div class="oh"><span class="on">方程豹钛7 · 享界 S9/S9T · 智界 R7/S7</span><span class="otag cb">座舱为主</span></div>
+<table>
+<tr><td class="dt"><span class="ch new">新增</span></td><td class="md"><b>隐私与用车便捷</b>——方程豹钛7 新增一键无痕、哨兵模式时段预约开关、停车助手订单主动提醒与车机缴费、智慧寻车(行程结束上传车辆周围环境照片)。</td></tr>
+<tr><td class="dt"><span class="ch new">新增</span></td><td class="md"><b>泊出与充电信息</b>——享界 S9/S9T 新增手势泊出(车头 2-4m 挥手激活)、充电站分时电价显示与充电车位忙闲状态;智界 R7/S7 新增可编辑途经点、同园区导航至充电车位。</td></tr>
+<tr><td class="dt"><span class="ch up">升级</span></td><td class="md"><b>导航与座舱</b>——方程豹钛7 DiLink 座舱 UI 全面升级;智界优化组队出行实时对讲、沿途联想搜索与高速服务区充电站卡片,驾驶侧无新增功能。</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ===== 8: 本月新高阶信号 vs 千里 ===== -->
+<section class="sec" data-blk="8" data-label="新高阶信号对标"><div class="sec-head"><span class="idx">07</span><h2>本月新出现的高阶信号 vs 千里</h2><div class="bar"></div>
+<p class="sub">10 月新车/OTA 中的高阶能力。数据来自各车官方配置表与 OTA 公告。</p></div>
+<table class="sig-tb"><colgroup><col class="c1"><col class="c2"><col class="c3"></colgroup>
+<thead><tr><th>能力项</th><th>10 月出现在哪些新车 / OTA</th><th>千里规划状态</th></tr></thead>
+<tbody>
+<tr>
+<td><div class="cap">跨楼层记忆泊车(2-3km)</div></td>
+<td><b>新车 4 款</b>:风神 L8+(3km/七层地库)、捷达 M6(3km)、阿尔法 S5(2km)、与众 06·07(2km)<br><b>OTA 1 条</b>:零跑 2027 款记忆泊车自定义限速<br>记忆距离从 1km 级拉到 2-3km 成为宣传点</td>
+<td><div class="cap r">已具备</div></td>
+</tr>
+<tr>
+<td><div class="cap">收费站 / ETC 选道通行</div></td>
+<td><b>新车 3 款</b>:红旗天工07(ETC 无感通行)、理想 i6(高速 ETC 自主通行)、ID.ERA 8X(ETC 自主通行)<br><b>OTA 1 条</b>:传祺向往 M8(ETC/人工通道选道,NDA 下选 ETC 自行通行)</td>
+<td><div class="cap r">已具备</div></td>
+</tr>
+<tr>
+<td><div class="cap">窄路多把掉头</div></td>
+<td><b>新车 2 款</b>:风神 L8+(窄路三点掉头)、红旗天工07(端到端三点掉头)<br><b>OTA 1 条</b>:别克至境 L7(窄路多把掉头,算法自动规划进退路径)</td>
+<td><div class="cap r">已具备</div></td>
+</tr>
+<tr>
+<td><div class="cap">充电车位领航</div></td>
+<td><b>新车 1 款</b>:理想 i6(NOA 直达充电车位,自动降地锁/泊入/开充电口盖)<br><b>OTA 2 条</b>:阿维塔 OS 6.1.0(园区空闲充电车位导航直达)、智界 R7/S7(同园区导航至充电车位)</td>
+<td><div class="cap r">已具备</div></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<!-- ===== 10: Footer ===== -->
+<div class="footer" data-blk="10">
+  <div class="disclaimer">依 23 款新车官方配置表与 12 条 OTA 公告整理。表内「—」为官方未逐项列出,非等同不具备;「◐」含选装解锁或限高配版本。预售车型功能以正式上市为准,价格与配置以官方为准。</div>
+  <div class="frow"><span class="sign">信息收集 BY FO 甚平</span></div>
+</div>
+
+</div></div>
+
+<div id="btnBar"><button id="btnSplit">分段导出<s>推荐 · 发飞书</s></button><button id="btnFull">整页长图</button></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js" onerror="window.__h2iFailed=true"></script>
+<script>
+const EXPORT_WIDTH = 1080;
+const PIXEL_BUDGET = 10000000;
+const MAX_SCALE    = 2;
+const TARGET_SCALE = 1.4;
+const MAX_SEGS     = 6;
+const CONT_H       = 90;
+const EXPORT_BG    = '#F4F8FF';
+const BASE         = 'zhijia-monthly-202610';
+const bar = document.getElementById('btnBar');
+const btnSplit = document.getElementById('btnSplit');
+const btnFull  = document.getElementById('btnFull');
+const sleep = ms => new Promise(r=>setTimeout(r, ms));
+
+function libOk(){
+  if(window.__h2iFailed || typeof htmlToImage === 'undefined'){
+    alert('导出库未加载。请用真正的浏览器(Chrome/Edge)双击打开此 HTML 文件(不要在预览窗格里点),并保证能联网加载一次 CDN,再试。');
+    return false;
+  }
+  return true;
+}
+function mkClone(){
+  const clone = document.querySelector('.container').cloneNode(true);
+  const cw = clone.querySelector('.wrap');
+  cw.style.maxWidth = (EXPORT_WIDTH - 130) + 'px';
+  return {clone, cw};
+}
+function mkHolder(clone){
+  const holder = document.createElement('div');
+  holder.style.cssText = 'position:fixed;top:0;left:0;z-index:-1;width:'+EXPORT_WIDTH+'px;background:'+EXPORT_BG+';';
+  const inner = document.createElement('div');
+  inner.style.cssText = 'width:'+EXPORT_WIDTH+'px;';
+  inner.appendChild(clone);
+  holder.appendChild(inner);
+  document.body.appendChild(holder);
+  return {holder, inner};
+}
+
+async function plan(){
+  const {clone, cw} = mkClone();
+  const {holder} = mkHolder(clone);
+  await document.fonts.ready; await sleep(200);
+  const blocks = [...cw.children].map(el=>({
+    blk: el.getAttribute('data-blk'),
+    label: el.getAttribute('data-label') || '',
+    h: el.offsetHeight
+  }));
+  document.body.removeChild(holder);
+  // 固定分页规则(共4页,按模块内容多寡划分,保证任何模块不被切断):
+  // P1=[0,1,2,3] hero + 本月重点 + 三个信号 + 方案分布
+  // P2=[4] 10月智驾新车一览(单页最高,独立成页)
+  // P3=[5,6] 高阶功能对照 + 对照结论(紧耦合不可拆)
+  // P4=[7,8,10] OTA 与功能升级 + 新高阶信号 vs 千里 + footer
+  const PAGE_GROUPS = [['0','1','2','3'],['4'],['5','6'],['7','8','10']];
+  const segs = PAGE_GROUPS.map(g => blocks.filter(b => g.includes(b.blk)))
+                           .filter(g => g.length);
+  if(segs.length < 2){ return [{keep:null, label:'整页'}]; }
+  return segs.map(g=>({
+    keep: g.map(b=>b.blk),
+    label: g.map(b=>b.label).filter(Boolean).join(' · ') || '续'
+  }));
+}
+
+async function shoot(keep, contTitle){
+  const {clone, cw} = mkClone();
+  [...cw.children].forEach(el=>{
+    if(keep && !keep.includes(el.getAttribute('data-blk'))) el.remove();
+  });
+  if(contTitle){
+    const hd = document.createElement('div');
+    hd.className = 'kicker-row';
+    hd.style.cssText = 'padding:54px 0 8px;margin-bottom:22px;';
+    hd.innerHTML = '<span class="kicker">智驾月报</span>'
+      + '<span class="line"></span>'
+      + '<span class="meta">2026年10月30日 · 内部速递</span>';
+    cw.insertBefore(hd, cw.firstChild);
+    const st = cw.querySelector('section.sec, .footer');
+    if(st) st.style.marginTop = '0';
+  }
+  const {holder, inner} = mkHolder(clone);
+  await document.fonts.ready; await sleep(150);
+  const H = holder.offsetHeight || inner.offsetHeight;
+  const ratio = Math.min(MAX_SCALE, Math.sqrt(PIXEL_BUDGET/(EXPORT_WIDTH*H)));
+  const opts = {pixelRatio:ratio, backgroundColor:EXPORT_BG, width:EXPORT_WIDTH, height:H};
+  try{ await htmlToImage.toPng(inner, opts); }catch(e){}
+  const dataUrl = await Promise.race([
+    htmlToImage.toPng(inner, opts),
+    new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),40000))
+  ]);
+  document.body.removeChild(holder);
+  return {dataUrl, H, ratio};
+}
+
+function overlay(shots){
+  const ov = document.createElement('div');
+  ov.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(3,7,18,.94);overflow:auto;padding:28px 20px;text-align:center;';
+  let html = '<div style="color:#0F172A;font-size:17px;font-weight:800;margin-bottom:6px;">导出完成 · 共 '+shots.length+' 张</div>'
+    + '<div style="color:#64748B;font-size:13px;margin-bottom:22px;">逐张点击下载,按顺序发飞书。倍数低于 1.00 表示已被像素预算压缩。点击空白处关闭</div>';
+  shots.forEach(s=>{
+    const mb = ((s.dataUrl.length*3/4)/1048576).toFixed(2);
+    html += '<div style="display:inline-block;vertical-align:top;margin:0 12px 26px;max-width:340px;">'
+      + '<div style="color:#0F172A;font-size:14px;font-weight:700;margin-bottom:4px;">'+s.title+'</div>'
+      + '<div style="color:#64748B;font-size:12px;margin-bottom:8px;">'+EXPORT_WIDTH+'x'+s.H+' · '+s.ratio.toFixed(2)+'x · '+mb+' MB</div>'
+      + '<a href="'+s.dataUrl+'" download="'+s.file+'" style="display:inline-block;background:linear-gradient(135deg,#5B9BFF,#2D7FF9);color:#FFFFFF;padding:8px 20px;border-radius:999px;font-weight:800;font-size:14px;text-decoration:none;margin-bottom:10px;box-shadow:0 4px 12px rgba(45,127,249,.32);">下载</a>'
+      + '<div><img src="'+s.dataUrl+'" style="max-width:340px;width:100%;border-radius:10px;border:1px solid #DBE5F4;"></div></div>';
+  });
+  ov.innerHTML = html;
+  ov.addEventListener('click',e=>{ if(e.target===ov) document.body.removeChild(ov); });
+  document.body.appendChild(ov);
+}
+
+async function run(btn, mode){
+  if(!libOk()) return;
+  [...bar.querySelectorAll('button')].forEach(b=>b.disabled=true);
+  const old = btn.innerHTML;
+  const shots = [];
+  try{
+    let jobs;
+    if(mode === 'full'){
+      jobs = [{keep:null, cont:null, title:'整页长图', file:BASE+'.png'}];
+    }else{
+      btn.innerHTML = '测量中…';
+      const segs = await plan();
+      const n = segs.length;
+      jobs = segs.map((s,i)=>({
+        keep: s.keep,
+        cont: (n===1 || i===0) ? null : ('第 '+(i+1)+' / '+n+' 张'),
+        title: n===1 ? '整页长图' : ('第 '+(i+1)+' 张 · '+s.label),
+        file: n===1 ? BASE+'.png' : BASE+'-'+(i+1)+'.png'
+      }));
+    }
+    for(let i=0;i<jobs.length;i++){
+      btn.innerHTML = '生成中 '+(i+1)+'/'+jobs.length+'…';
+      const r = await shoot(jobs[i].keep, jobs[i].cont);
+      shots.push({...r, title:jobs[i].title, file:jobs[i].file});
+    }
+    overlay(shots);
+  }catch(err){
+    alert('生成失败:'+err.message+'\n请用真正的浏览器双击打开(不要在预览窗格点),并联网加载一次 CDN。');
+  }
+  btn.innerHTML = old;
+  [...bar.querySelectorAll('button')].forEach(b=>b.disabled=false);
+}
+
+btnSplit.addEventListener('click',()=>run(btnSplit,'auto'));
+btnFull.addEventListener('click',()=>run(btnFull,'full'));
+</script>
+</body>
+</html>
